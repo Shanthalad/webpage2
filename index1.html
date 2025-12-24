@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RHCSA — Enterprise Cloud Solutions</title>
+<style>
+  :root{--bg:#05060f;--muted:#bdbfe8;--accent1:#ff8a4d;--accent2:#ff4dd9;--accent3:#3fe6ff;--accent4:#6b4bff;--glass:rgba(255,255,255,0.06)}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#fff;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 56px}
+.nav .left{display:flex;align-items:center;gap:14px}
+.logo{height:40px;filter:drop-shadow(0 6px 18px rgba(75,70,200,0.3))}
+.nav .center{display:flex;gap:20px;align-items:center}
+.nav .center a{opacity:0.9}
+.nav .right{display:flex;gap:12px;align-items:center}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.12);padding:8px 16px;border-radius:24px;color:#fff}
+.btn-primary{background:linear-gradient(90deg,var(--accent4),#8b3bff);padding:10px 18px;border-radius:26px;color:#fff;border:none;box-shadow:0 8px 30px rgba(100,70,255,0.16)}
+
+/* HERO */
+.hero{display:flex;gap:40px;align-items:center;padding:20px 26px 25px}
+.left-col{flex:1;max-width:58%}
+.badge{display:inline-block;padding:8px 18px;border-radius:24px;background:rgba(100,80,200,0.12);color:#cfcfff;margin-bottom:20px;font-size:14px}
+h1{font-size:56px;line-height:64px;margin:0 0 18px;background:linear-gradient(90deg,#8d5cff,#ff63c4);-webkit-background-clip:text;color:transparent;font-weight:700}
+p.lead{color:#cfcfe1;font-size:18px;max-width:720px;line-height:1.6;margin-bottom:22px}
+.actions{display:flex;gap:14px;align-items:center;margin-top:6px}
+.cta-primary{background:linear-gradient(90deg,#4c55ff,#8c4bff);padding:12px 24px;border-radius:28px;border:none;color:white;box-shadow:0 12px 40px rgba(76,85,255,0.18)}
+.cta-secondary{background:rgba(255,255,255,0.04);padding:12px 22px;border-radius:28px;border:none;color:#fff}
+.stats{display:flex;gap:40px;margin-top:36px;color:#b6b9ff}
+.stat strong{display:block;font-size:20px;color:#fff}
+
+/* SQUARES instead of cubes */
+.scene-wrap{width:520px;height:520px;position:relative;perspective:1400px}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(18deg) rotateY(0deg);display:flex;align-items:center;justify-content:center}
+.square{
+  position:absolute;
+  width:130px;height:130px;
+  border-radius:14px;
+  opacity:0.8;
+  box-shadow:0 0 28px rgba(140,75,255,0.08),0 0 60px rgba(255,77,211,0.06),inset 0 0 20px rgba(255,255,255,0.02);
+}
+.g1{background:linear-gradient(135deg,#ff7a2e 0%,#ff4dd3 40%,rgba(0,0,0,0.18) 100%)}
+.g2{background:linear-gradient(135deg,#00f2ff 0%,#00b4ff 60%,rgba(0,0,0,0.2) 100%)}
+.g3{background:linear-gradient(135deg,#6b50ff 0%,#ff73b4 60%,rgba(0,0,0,0.18) 100%)}
+.g4{background:linear-gradient(135deg,#ff9a4d 0%,#3de7ff 60%,rgba(0,0,0,0.18) 100%)}
+
+/* positions – same spots the cubes used to occupy */
+.c-top{left:190px;top:40px}
+.c-center{left:190px;top:180px}
+.c-fl{left:80px;top:260px}
+.c-fr{left:300px;top:260px}
+.c-br{left:320px;top:100px}
+.c-bot{left:240px;top:320px;transform:scale(0.9)}
+
+/* UI cards */
+.security-card{position:absolute;top:100px;right:50px;background:rgba(0,0,0,0.4);backdrop-filter:blur(10px);padding:10px 20px;border-radius:15px;display:flex;align-items:center;gap:10px}
+.icon{width:20px;height:20px;background:#00ff80;border-radius:5px}
+.title{font-weight:bold}
+.subtitle{font-size:13px;color:#cfcfcf}
+.badge-card{position:absolute;left:24px;bottom:24px;background:linear-gradient(180deg,rgba(255,0,40,0.04),rgba(0,0,0,0.1));border:1px solid rgba(255,0,40,0.35);padding:18px;border-radius:14px;width:160px;box-shadow:0 10px 30px rgba(0,0,0,0.7)}
+.small-panel{position:absolute;right:22px;top:140px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:14px 18px;border:1px solid rgba(255,255,255,0.06);width:220px;backdrop-filter:blur(6px);box-shadow:0 14px 40px rgba(30,30,40,0.6)}
+.small-panel .title{font-size:13px;color:#cfd3e9}
+.small-panel .desc{font-weight:700;font-size:18px;margin-top:6px}
+.stat-card{position:absolute;right:78px;bottom:58px;background:linear-gradient(180deg,rgba(20,25,40,0.8),rgba(10,12,18,0.6));border-radius:12px;padding:12px 16px;border:1px solid rgba(80,150,255,0.06);display:flex;gap:26px;align-items:center;width:210px;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+.stat-card .left{font-weight:700;color:#7fd8ff;font-size:20px}
+.stat-card .right{font-weight:700;color:#ff5b5b;font-size:20px}
+.stat-card .sub{font-size:12px;color:#cfcfe1}
+
+/* mobile responsiveness */
+@media (max-width:1000px){
+  .hero{flex-direction:column;padding:36px 28px}
+  .left-col{max-width:100%}
+  .scene-wrap{width:420px;height:420px;margin-top:28px}
+}
+@media (max-width:640px){
+  .nav{padding:12px 18px}
+  h1{font-size:32px;line-height:40px}
+  .scene-wrap{width:320px;height:320px}
+  .square{width:100px;height:100px}
+  .c-center{left:110px;top:120px}
+  .c-top{left:110px;top:20px}
+  .c-fl{left:20px;top:180px}
+  .c-fr{left:200px;top:180px}
+  .c-br{left:220px;top:60px}
+  .c-bot{left:150px;top:230px}
+}
+ 
+    body {margin:0; background:#000; color:#fff; font-family:sans-serif;}
+    .toolbar {background:#111; padding:4px; display:flex; max-width: 900px; gap:8px;}
+    .toolbar img {height:390px;}
+    .content {position:relative; height:80vh; display:flex; align-items:center; justify-content:center;}
+    .cubes {position:absolute; width:100%; height:100%; background:url('cubes.png') center/cover;}
+    .badge {position:absolute; top:20px; left:200px; background:rgba(0,0,0,.6); padding:8px 12px; border-radius:4px;}
+    .shield {position:absolute; bottom:20px; max-width: 380; height: 150px;  border: 2px solid red; animation: bounce 2s ease-in-out infinite;  left:-490px;}
+    .contentss {position:relative; height:80vh; display:flex; align-items:center; justify-content:center;}
+    .cubesss {position:absolute; width:400%; height:400%; background:url('cubes.png') center/cover;}
+    .shieldss {position:absolute; bottom:20px; max-width: 380; height: 150px; margin-bottom: 350px; margin-left: -100px;  animation: bounce 2s ease-in-out infinite;  left:-490px;}
+   
+</style>
+</head> 
+<body>
+<header class="nav">
+  <div class="left">
+    <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='40'><rect width='140' height='40' fill='%230071af'/><text x='12' y='26' font-size='14' fill='white' font-family='Arial'>HawkStack</text></svg>" alt="HawkStack">
+    <img class="logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='40'><rect width='140' height='40' fill='%23d61f1f'/><text x='10' y='26' font-size='14' fill='white' font-family='Arial'>Red Hat</text></svg>" alt="RedHat">
+  </div>
+  <nav class="center">
+    <a href="#">Home</a>
+    <a href="#">HawkStack's Approach</a>
+    <a href="#">Red Hat Services</a>
+    <a href="#">RHCSA Certification</a>
+  </nav>
+  <div class="right">
+    <button class="btn-outline">Contact</button>
+    <button class="btn-primary">Talk to Learning Team</button>
+  </div>
+</header>
+
+<main class="hero" role="main" aria-labelledby="hero-heading">
+  <div class="left-col">
+    <!-- <div class="badge">🔒 Red Hat Certified Training</div> -->
+    <h1 id="hero-heading">RHCSA Certification &</h1>
+    <h2 style="font-size: 35px; margin-top: -20px;"><strong> Enterprice Cloud Solutions</strong></h2>
+    <p class="lead">Master Red Hat Enterprise Linux and accelerate your career with industry‑recognized certifications and hands‑on cloud training.</p>
+    <div class="actions">
+      <button class="cta-primary">Enroll for RHCSA / Training</button>
+      <button class="cta-secondary">View Courses</button>
+    </div>
+    <div class="stats" aria-hidden="false">
+      <div class="stat"><strong>99.9%</strong><span> Uptime SLA</span></div>
+      <div class="stat"><strong>500K+</strong><span> Threats Blocked</span></div>
+      <div class="stat"><strong>24/7</strong><span> Monitoring</span></div>
+      <div class="stat"><strong>10M+</strong><span> Events/Day</span></div>
+    </div>
+  </div>
+
+<!-- <img src="WhatsApp Image 2025-12-10 at 10.25.57 PM.jpeg"  width="40%"  alt="Colorful 3D cubes"> -->
+
+  <!-- <div class="scene-wrap" aria-hidden="true">
+    <div class="scene">
+      <div class="square g1 c-top"></div>
+      <div class="square g2 c-center"></div>
+      <div class="square g3 c-fl"></div>
+      <div class="square g4 c-fr"></div>
+      <div class="square g2 c-br"></div>
+      <div class="square g1 c-bot"></div>
+    </div> -->
+
+  <div class="toolbar">
+    <img src="WhatsApp Image 2025-12-10 at 10.25.57 PM.jpeg" alt="cubes">                         
+    <!-- <img src="WhatsApp Image 2025-12-10 at 10.43.38 PM.jpeg" > -->
+  </div>
+  <div class="content">
+    <div class="cubes"></div>
+    <!-- <div class="badge">🔒 Security Status: All Systems Protected</div> -->
+    <img class="shield" src="WhatsApp Image 2025-12-10 at 10.43.38 PM.jpeg" animation: bounce 2s ease-in-out infinite;>
+  </div>
+
+  <div>
+    <div class="contentss">
+    <div class="cubesss"></div>
+    <img class="shieldss" src="WhatsApp Image 2025-12-11 at 6.19.25 PM.jpeg" bm.RotateFlip(RotateFlipType.Rotate90FlipNone); animation: bounce 2s ease-in-out infinite;>
+    
+  </div>
+
+    
+    <div class="security-card floating">
+      <div class="icon"></div>
+      <div><span class="title">Security Status</span><br><span class="subtitle">All Systems Protected</span></div>
+    </div>
+    <div class="stat-card" aria-hidden="true">
+      <div><div class="left">10M+</div><div class="sub">Events/Day</div></div>
+      <div style="margin-left:auto;text-align:right"><div class="right">50ms</div><div class="sub">Response</div></div>
+    </div>
+    <!-- <img src="WhatsApp Image 2025-12-10 at 10.43.38 PM.jpeg"  alt="redhat"> -->
+  </div><!-- scene-wrap -->
+</main>
+</body>
+</html>
